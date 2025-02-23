@@ -1,3 +1,3 @@
 export default function OrganizationIdPage() {
-  return <></>;
+  return <>organization id page</>;
 }
