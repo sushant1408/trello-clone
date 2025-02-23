@@ -2,13 +2,31 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+### First, run the development server:
 
 ```bash
 npm run dev
 ```
 
 Open [http://localhost:3008](http://localhost:3008) with your browser to see the result.
+
+### Run the prisma studio:
+
+```bash
+npx prisma studio
+```
+
+After making any changes in db schema in `prisma/schema.prisma` file, run the following command:
+
+```bash
+npx prisma generate
+```
+
+and to push the changes to the database, run
+
+```bash
+npx prisma db push
+```
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Inter](https://vercel.com/font).
 
