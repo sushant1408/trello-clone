@@ -1,6 +1,6 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, KeyboardEvent } from "react";
 import { useFormStatus } from "react-dom";
 
 import { Input } from "@/components/ui/input";
@@ -19,6 +19,7 @@ interface FormInputProps {
   className?: string;
   defaultValue?: string;
   onBlur?: () => void;
+  onKeyDown?: (e: KeyboardEvent) => void;
 }
 
 const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
@@ -31,6 +32,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       errors,
       label,
       onBlur,
+      onKeyDown,
       placeholder,
       required,
       type,
@@ -53,6 +55,7 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           <Input
             placeholder={placeholder}
             onBlur={onBlur}
+            onKeyDown={onKeyDown}
             defaultValue={defaultValue}
             ref={ref}
             required={required}

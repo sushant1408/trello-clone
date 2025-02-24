@@ -8,7 +8,8 @@ import { useLocalStorage } from "usehooks-ts";
 import { Accordion } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { NavItem, Organization } from "./nav-item";
+import { NavItem } from "./nav-item";
+import { Organization } from "@/types";
 
 interface SidebarProps {
   storageKey?: string;

@@ -17,13 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-
-export type Organization = {
-  id: string;
-  slug: string;
-  imageUrl: string;
-  name: string;
-};
+import { Organization } from "@/types";
 
 interface NavItemProps {
   isActive: boolean;
