@@ -1,17 +1,16 @@
 "use client";
 
-import { forwardRef } from "react";
+import { forwardRef, KeyboardEventHandler } from "react";
 import { useFormStatus } from "react-dom";
 
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { Textarea } from "../ui/textarea";
 import { FormErrors } from "./form-errors";
 
-interface FormInputProps {
+interface FormTextareaProps {
   id: string;
   label?: string;
-  type?: string;
   placeholder?: string;
   required?: boolean;
   disabled?: boolean;
@@ -19,9 +18,11 @@ interface FormInputProps {
   className?: string;
   defaultValue?: string;
   onBlur?: () => void;
+  onClick?: () => void;
+  onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement> | undefined;
 }
 
-const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
+const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
   (
     {
       id,
@@ -33,7 +34,8 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
       onBlur,
       placeholder,
       required,
-      type,
+      onClick,
+      onKeyDown,
     },
     ref
   ) => {
@@ -50,18 +52,22 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
               {label}
             </Label>
           ) : null}
-          <Input
+          <Textarea
             placeholder={placeholder}
             onBlur={onBlur}
+            onKeyDown={onKeyDown}
             defaultValue={defaultValue}
             ref={ref}
             required={required}
             id={id}
             name={id}
-            type={type}
             disabled={pending || disabled}
-            className={cn("text-sm px-2 py-1 h-7", className)}
+            className={cn(
+              "resize-none focus-visible:ring-0 focus-visible:ring-offset-0 ring-0 focus:ring-0 outline-none shadow-sm",
+              className
+            )}
             aria-describedby={`${id}-error`}
+            onClick={onClick}
           />
         </div>
 
@@ -71,6 +77,6 @@ const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
   }
 );
 
-FormInput.displayName = "FormInput";
+FormTextarea.displayName = "FormTextarea";
 
-export { FormInput };
+export { FormTextarea };
