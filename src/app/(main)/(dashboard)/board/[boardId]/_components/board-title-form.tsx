@@ -46,14 +46,14 @@ const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
   };
 
   const onSubmit = (formData: FormData) => {
-    const formTitle = formData.get("title") as string;
+    const title = formData.get("title") as string;
 
-    if (title === formTitle) {
+    if (title === data.title) {
       disableEditing();
       return;
     }
 
-    execute({ id: data.id, title: formTitle });
+    execute({ id: data.id, title: title });
   };
 
   const onBlur = () => {

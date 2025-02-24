@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useCardModal } from "@/hooks/use-card-modal";
 import { fetcher } from "@/lib/fetcher";
 import { CardWithList } from "@/types";
+import { CardActions } from "./card-actions";
 import { Description } from "./description";
 import { Header } from "./header";
 
@@ -32,6 +33,11 @@ const CardModal = () => {
               )}
             </div>
           </div>
+          {!cardData ? (
+            <CardActions.Skeleton />
+          ) : (
+            <CardActions data={cardData} />
+          )}
         </div>
       </DialogContent>
     </Dialog>

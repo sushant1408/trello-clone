@@ -5,8 +5,8 @@ import { revalidatePath } from "next/cache";
 
 import { createSafeAction } from "@/lib/create-safe-action";
 import { db } from "@/lib/db";
-import { UpdateCardSchema } from "./schema";
 import { InputType, ReturnType } from "./types";
+import { DeleteCardSchema } from "./schema";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = await auth();
@@ -17,12 +17,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const { boardId, id, ...rest } = data;
+  const { id, boardId } = data;
 
   let card;
 
   try {
-    card = await db.card.update({
+    card = await db.card.delete({
       where: {
         id,
         list: {
@@ -31,13 +31,10 @@ const handler = async (data: InputType): Promise<ReturnType> => {
           },
         },
       },
-      data: {
-        ...rest,
-      },
     });
   } catch (error) {
     return {
-      error: "Failed to update the card",
+      error: "Failed to copy the card",
     };
   }
 
@@ -47,4 +44,4 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   };
 };
 
-export const updateCard = createSafeAction(UpdateCardSchema, handler);
+export const deleteCard = createSafeAction(DeleteCardSchema, handler);
