@@ -1,6 +1,7 @@
-import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+
+import { db } from "@/lib/db";
 import { ListContainer } from "./_components/list-container";
 
 interface BoardIdPageProps {
@@ -28,6 +29,9 @@ export default async function BoardIdPage({ params }: BoardIdPageProps) {
           order: "asc",
         },
       },
+    },
+    orderBy: {
+      order: "asc",
     },
   });
 
