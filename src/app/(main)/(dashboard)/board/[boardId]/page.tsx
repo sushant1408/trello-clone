@@ -31,7 +31,9 @@ export default async function BoardIdPage({ params }: BoardIdPageProps) {
     },
   });
 
-  return <div className="p-4 h-full overflow-x-auto">
-    <ListContainer boardId={boardId} data={lists} />
-  </div>;
+  return (
+    <div className="p-4 h-full overflow-x-auto">
+      <ListContainer boardId={boardId} data={lists} />
+    </div>
+  );
 }

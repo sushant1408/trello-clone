@@ -1,13 +1,14 @@
 "use client";
 
 import { Board } from "@prisma/client";
-import { ComponentRef, KeyboardEvent, useRef, useState } from "react";
+import { ComponentRef, useRef, useState } from "react";
 import { toast } from "sonner";
 
 import { updateBoard } from "@/actions/update-board";
 import { FormInput } from "@/components/form/form-input";
 import { Button } from "@/components/ui/button";
 import { useAction } from "@/hooks/use-action";
+import { useEventListener } from "usehooks-ts";
 
 interface BoardTitleFormProps {
   data: Board;
@@ -65,6 +66,8 @@ const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
     }
   };
 
+  useEventListener("keydown", onKeyDown);
+
   if (isEditing) {
     return (
       <form
@@ -78,7 +81,6 @@ const BoardTitleForm = ({ data }: BoardTitleFormProps) => {
           onBlur={onBlur}
           defaultValue={title}
           errors={fieldErrors}
-          onKeyDown={onKeyDown}
           className="text-lg font-bold px-[7px] py-1 h-7 bg-transparent focus-visible:outline-none focus-visible:ring-transparent border-none"
         />
       </form>

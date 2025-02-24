@@ -3,15 +3,15 @@
 import { PlusIcon, XIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { ComponentRef, useRef, useState } from "react";
+import { toast } from "sonner";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
+import { createList } from "@/actions/create-list";
 import { FormInput } from "@/components/form/form-input";
-import { ListWrapper } from "./list-wrapper";
 import { FormSubmit } from "@/components/form/form-submit";
 import { Button } from "@/components/ui/button";
 import { useAction } from "@/hooks/use-action";
-import { createList } from "@/actions/create-list";
-import { toast } from "sonner";
+import { ListWrapper } from "./list-wrapper";
 
 const ListForm = () => {
   const params = useParams<{ boardId: string }>();
