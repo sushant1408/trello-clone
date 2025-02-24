@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { db } from "@/lib/db";
 import { InputType, ReturnType } from "./types";
-import { UpdateListSchema } from "./schema";
+import { DeleteListSchema } from "./schema";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = await auth();
@@ -17,12 +17,12 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const { title, id, boardId } = data;
+  const { id, boardId } = data;
 
   let list;
 
   try {
-    list = await db.list.update({
+    list = await db.list.delete({
       where: {
         id,
         boardId,
@@ -30,13 +30,10 @@ const handler = async (data: InputType): Promise<ReturnType> => {
           orgId,
         },
       },
-      data: {
-        title,
-      },
     });
   } catch (error) {
     return {
-      error: "Failed to update the list",
+      error: "Failed to delete the list",
     };
   }
 
@@ -46,4 +43,4 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   };
 };
 
-export const updateList = createSafeAction(UpdateListSchema, handler);
+export const deleteList = createSafeAction(DeleteListSchema, handler);
