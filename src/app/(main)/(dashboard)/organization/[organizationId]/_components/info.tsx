@@ -17,15 +17,23 @@ const Info = ({ isPro }: InfoProps) => {
     return <Info.Skeleton />;
   }
 
+  if (isLoaded && !organization) {
+    return null;
+  }
+
   return (
     <div className="flex items-center gap-x-4">
       <div className="w-[60px] h-[60px] relative">
-        <Image
-          src={organization?.imageUrl || ""}
-          fill
-          alt="organization"
-          className="rounded-md object-cover"
-        />
+        {organization?.hasImage ? (
+          <Image
+            src={organization?.imageUrl}
+            fill
+            alt="organization"
+            className="rounded-md object-cover"
+          />
+        ) : (
+          <div className="rounded-md h-full w-full" />
+        )}
       </div>
       <div className="space-y-1">
         <p className="font-semibold text-xl">{organization?.name}</p>

@@ -7,7 +7,7 @@ import { QueryProvider } from "@/components/query-provider";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider afterSignOutUrl="/">
       <QueryProvider>
         <Toaster />
         <Modals />
