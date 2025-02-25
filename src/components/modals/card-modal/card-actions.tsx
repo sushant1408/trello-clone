@@ -71,7 +71,7 @@ const CardActions = ({ data }: CardActionsProps) => {
         onClick={onDelete}
         disabled={isDeleting}
         variant="gray"
-        className="w-full justify-start"
+        className="w-full justify-start hover:text-rose-600"
         size="inline"
       >
         <TrashIcon className="!size-4" />
