@@ -17,10 +17,6 @@ const Info = ({ isPro }: InfoProps) => {
     return <Info.Skeleton />;
   }
 
-  if (isLoaded && !organization) {
-    return null;
-  }
-
   return (
     <div className="flex items-center gap-x-4">
       <div className="w-[60px] h-[60px] relative">
