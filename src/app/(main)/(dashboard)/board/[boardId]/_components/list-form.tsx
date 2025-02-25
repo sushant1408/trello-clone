@@ -2,7 +2,7 @@
 
 import { PlusIcon, XIcon } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { ComponentRef, useRef, useState } from "react";
+import { ComponentRef, RefObject, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
@@ -59,7 +59,7 @@ const ListForm = () => {
   };
 
   useEventListener("keydown", onKeyDown);
-  useOnClickOutside(formRef, disableEditing);
+  useOnClickOutside(formRef as RefObject<HTMLFormElement>, disableEditing);
 
   if (isEditing) {
     return (

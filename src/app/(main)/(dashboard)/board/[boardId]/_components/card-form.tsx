@@ -3,7 +3,7 @@
 import { List } from "@prisma/client";
 import { PlusIcon, XIcon } from "lucide-react";
 import { useParams } from "next/navigation";
-import { ComponentRef, forwardRef, KeyboardEventHandler, useRef } from "react";
+import { ComponentRef, forwardRef, KeyboardEventHandler, RefObject, useRef } from "react";
 import { toast } from "sonner";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
@@ -43,7 +43,7 @@ const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
     };
 
     useEventListener("keydown", onKeyDown);
-    useOnClickOutside(formRef, disableEditing);
+    useOnClickOutside(formRef as RefObject<HTMLFormElement>, disableEditing);
 
     const onTextareaKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = (
       e
