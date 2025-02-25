@@ -3,12 +3,12 @@
 import { Board } from "@prisma/client";
 import { ComponentRef, useRef, useState } from "react";
 import { toast } from "sonner";
+import { useEventListener } from "usehooks-ts";
 
 import { updateBoard } from "@/actions/update-board";
 import { FormInput } from "@/components/form/form-input";
 import { Button } from "@/components/ui/button";
 import { useAction } from "@/hooks/use-action";
-import { useEventListener } from "usehooks-ts";
 
 interface BoardTitleFormProps {
   data: Board;

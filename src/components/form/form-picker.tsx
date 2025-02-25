@@ -2,13 +2,13 @@
 
 import { CheckIcon, Loader2Icon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useFormStatus } from "react-dom";
 
+import { defaultImages } from "@/constants/images";
 import { unsplash } from "@/lib/unsplash";
 import { cn } from "@/lib/utils";
-import { defaultImages } from "@/constants/images";
-import Link from "next/link";
 import { FormErrors } from "./form-errors";
 
 const DEFAULT_COUNT = 9;
@@ -29,16 +29,15 @@ const FormPicker = ({ id, errors }: FormPickerInterface) => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        // const result = await unsplash.photos.getRandom({
-        //   collectionIds: DEFAULT_COLLECTION_IDS,
-        //   count: DEFAULT_COUNT,
-        // });
+        const result = await unsplash.photos.getRandom({
+          collectionIds: DEFAULT_COLLECTION_IDS,
+          count: DEFAULT_COUNT,
+        });
 
-        // if (result && result.response) {
-        //   const fetchedImages = result.response as Array<Record<string, any>>;
-        //   setImages(fetchedImages);
-        // }
-        setImages(defaultImages);
+        if (result && result.response) {
+          const fetchedImages = result.response as Array<Record<string, any>>;
+          setImages(fetchedImages);
+        }
       } catch (error) {
         setImages(defaultImages);
       } finally {

@@ -1,8 +1,9 @@
 "use client";
 
-import { useCardModal } from "@/hooks/use-card-modal";
 import { Draggable } from "@hello-pangea/dnd";
 import { Card } from "@prisma/client";
+
+import { useCardModal } from "@/hooks/use-card-modal";
 
 interface CardItemProps {
   index: number;

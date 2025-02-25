@@ -4,6 +4,7 @@ import { Board } from "@prisma/client";
 import { MoreHorizontalIcon, XIcon } from "lucide-react";
 import { toast } from "sonner";
 
+import { deleteBoard } from "@/actions/delete-board";
 import { Button } from "@/components/ui/button";
 import {
   Popover,
@@ -12,7 +13,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useAction } from "@/hooks/use-action";
-import { deleteBoard } from "@/actions/delete-board";
 
 interface BoardOptionsProps {
   id: Board["id"];

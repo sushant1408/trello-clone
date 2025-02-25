@@ -11,6 +11,7 @@ import { db } from "@/lib/db";
 import { decreaseAvailableCount } from "@/lib/organization-limit";
 import { DeleteBoardSchema } from "./schema";
 import { InputType, ReturnType } from "./types";
+import { checkSubscription } from "@/lib/subscription";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = await auth();
@@ -20,6 +21,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       error: "Unauthorized",
     };
   }
+
+  const isPro = await checkSubscription();
 
   const { id } = data;
 
@@ -31,7 +34,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
 
-    await decreaseAvailableCount();
+    if (!isPro) {
+      await decreaseAvailableCount();
+    }
 
     await createAuditLog({
       action: ACTION.DELETE,

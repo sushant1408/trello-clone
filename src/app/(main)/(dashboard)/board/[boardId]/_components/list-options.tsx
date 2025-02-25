@@ -5,6 +5,7 @@ import { MoreHorizontalIcon, XIcon } from "lucide-react";
 import { ComponentRef, useRef } from "react";
 import { toast } from "sonner";
 
+import { copyList } from "@/actions/copy-list";
 import { deleteList } from "@/actions/delete-list";
 import { FormSubmit } from "@/components/form/form-submit";
 import { Button } from "@/components/ui/button";
@@ -16,7 +17,6 @@ import {
 } from "@/components/ui/popover";
 import { Separator } from "@/components/ui/separator";
 import { useAction } from "@/hooks/use-action";
-import { copyList } from "@/actions/copy-list";
 
 interface ListOptionsProps {
   data: List;
