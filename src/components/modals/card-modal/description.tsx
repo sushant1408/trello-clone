@@ -4,16 +4,16 @@ import { useQueryClient } from "@tanstack/react-query";
 import { AlignLeftIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { ComponentRef, useRef, useState } from "react";
+import { toast } from "sonner";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
-import { FormTextarea } from "@/components/form/form-textarea";
-import { Skeleton } from "@/components/ui/skeleton";
-import { CardWithList } from "@/types";
-import { FormSubmit } from "@/components/form/form-submit";
-import { Button } from "@/components/ui/button";
-import { useAction } from "@/hooks/use-action";
 import { updateCard } from "@/actions/update-card";
-import { toast } from "sonner";
+import { FormSubmit } from "@/components/form/form-submit";
+import { FormTextarea } from "@/components/form/form-textarea";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useAction } from "@/hooks/use-action";
+import { CardWithList } from "@/types";
 
 interface DescriptionProps {
   data: CardWithList;
@@ -33,6 +33,9 @@ const Description = ({ data }: DescriptionProps) => {
     onSuccess: ({ description, title, id }) => {
       queryClient.invalidateQueries({
         queryKey: ["card", id],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["card-logs", id],
       });
 
       toast.success(`Card "${title}" updated`);

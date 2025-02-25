@@ -1,16 +1,16 @@
 "use client";
 
-import { CopyIcon, Loader2Icon, TrashIcon } from "lucide-react";
+import { CopyIcon, TrashIcon } from "lucide-react";
+import { useParams } from "next/navigation";
+import { toast } from "sonner";
 
 import { copyCard } from "@/actions/copy-card";
 import { deleteCard } from "@/actions/delete-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useAction } from "@/hooks/use-action";
-import { CardWithList } from "@/types";
-import { toast } from "sonner";
-import { useParams } from "next/navigation";
 import { useCardModal } from "@/hooks/use-card-modal";
+import { CardWithList } from "@/types";
 
 interface CardActionsProps {
   data: CardWithList;

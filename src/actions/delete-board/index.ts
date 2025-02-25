@@ -1,9 +1,11 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
+import { ACTION, ENTITY_TYPE } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+import { createAuditLog } from "@/lib/create-audit-log";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { db } from "@/lib/db";
 import { DeleteBoardSchema } from "./schema";
@@ -21,11 +23,18 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   const { id } = data;
 
   try {
-    await db.board.delete({
+    const board = await db.board.delete({
       where: {
         id,
         orgId,
       },
+    });
+
+    await createAuditLog({
+      action: ACTION.DELETE,
+      entityId: board.id,
+      entityTitle: board.title,
+      entityType: ENTITY_TYPE.BOARD,
     });
   } catch (error) {
     return {

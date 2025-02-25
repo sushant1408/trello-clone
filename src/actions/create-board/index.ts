@@ -1,8 +1,10 @@
 "use server";
 
 import { auth } from "@clerk/nextjs/server";
+import { ACTION, ENTITY_TYPE } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
+import { createAuditLog } from "@/lib/create-audit-log";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { db } from "@/lib/db";
 import { CreateBoardSchema } from "./schema";
@@ -47,6 +49,13 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         imageUserName,
         orgId,
       },
+    });
+
+    await createAuditLog({
+      action: ACTION.CREATE,
+      entityId: board.id,
+      entityTitle: board.title,
+      entityType: ENTITY_TYPE.BOARD,
     });
   } catch (error) {
     return {
