@@ -24,7 +24,7 @@ const Info = ({ isPro }: InfoProps) => {
   return (
     <div className="flex items-center gap-x-4">
       <div className="w-[60px] h-[60px] relative">
-        {organization?.hasImage ? (
+        {organization?.imageUrl ? (
           <Image
             src={organization?.imageUrl}
             fill
@@ -32,7 +32,7 @@ const Info = ({ isPro }: InfoProps) => {
             className="rounded-md object-cover"
           />
         ) : (
-          <div className="rounded-md h-full w-full" />
+          <div className="rounded-md h-full w-full bg-neutral-200" />
         )}
       </div>
       <div className="space-y-1">
