@@ -42,7 +42,7 @@ const NavItem = ({
       href: `/organization/${organization.id}`,
     },
     {
-      label: "Activity",
+      label: "Activities",
       icon: <ActivityIcon className="!size-4" />,
       href: `/organization/${organization.id}/activity`,
     },
