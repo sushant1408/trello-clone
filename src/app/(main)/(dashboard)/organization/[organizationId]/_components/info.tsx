@@ -1,17 +1,20 @@
 "use client";
 
-import { Skeleton } from "@/components/ui/skeleton";
 import { useOrganization } from "@clerk/nextjs";
 import { CreditCardIcon } from "lucide-react";
 import Image from "next/image";
 
-const Info = () => {
+import { Skeleton } from "@/components/ui/skeleton";
+
+interface InfoProps {
+  isPro: boolean;
+}
+
+const Info = ({ isPro }: InfoProps) => {
   const { organization, isLoaded } = useOrganization();
 
   if (!isLoaded) {
-    return (
-      <Info.Skeleton />
-    );
+    return <Info.Skeleton />;
   }
 
   return (
@@ -28,7 +31,7 @@ const Info = () => {
         <p className="font-semibold text-xl">{organization?.name}</p>
         <div className="flex items-center text-xs text-muted-foreground">
           <CreditCardIcon className="!size-3 mr-1" />
-          Free
+          {isPro ? "Pro" : "Free"}
         </div>
       </div>
     </div>
@@ -50,6 +53,6 @@ Info.Skeleton = function InfoSkeleton() {
       </div>
     </div>
   );
-}
+};
 
 export { Info };

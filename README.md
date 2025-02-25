@@ -10,6 +10,8 @@ npm run dev
 
 Open [http://localhost:3008](http://localhost:3008) with your browser to see the result.
 
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Inter](https://vercel.com/font).
+
 ### Run the prisma studio:
 
 ```bash
@@ -28,7 +30,31 @@ and to push the changes to the database, run
 npx prisma db push
 ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Inter](https://vercel.com/font).
+### Stripe CLI & Webhooks:
+
+If Stripe CLI is not installed, run the command:
+
+```bash
+brew install stripe/stripe-cli/stripe
+```
+
+Login to Stripe CLI:
+
+```bash
+stripe login
+```
+
+Get the webhook signing secret, run the command:
+
+```bash
+stripe listen --forward-to localhost:3008/api/webhook
+```
+
+Trigger events with CLI:
+
+```bash
+stripe trigger <event>
+```
 
 ## Deploy on Vercel
 

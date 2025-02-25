@@ -8,6 +8,7 @@ import { createAuditLog } from "@/lib/create-audit-log";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { db } from "@/lib/db";
 import { hasAvailableCount, increaseAvailableCount } from "@/lib/organization-limit";
+import { checkSubscription } from "@/lib/subscription";
 import { CreateBoardSchema } from "./schema";
 import { InputType, ReturnType } from "./types";
 
@@ -21,8 +22,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   }
 
   const canCreate = await hasAvailableCount();
+  const isPro = await checkSubscription();
 
-  if (!canCreate) {
+  if (!canCreate && !isPro) {
     return {
       error: "You have reached your limit of free board. Please upgrade to create more"
     }
@@ -60,7 +62,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
 
-    await increaseAvailableCount();
+    if (!isPro) {
+      await increaseAvailableCount();
+    }
 
     await createAuditLog({
       action: ACTION.CREATE,
