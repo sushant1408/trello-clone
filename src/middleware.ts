@@ -30,7 +30,7 @@ export default clerkMiddleware(async (auth, request) => {
   } 
 
   // if user is not logged in and trying to access any page other than public pages
-  if (!isPublicRoute(request)) {
+  if (!userId && !isPublicRoute(request)) {
     // redirect user to "/sign-in" page
     await auth.protect();
   }
