@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { createSafeAction } from "@/lib/create-safe-action";
 import { db } from "@/lib/db";
+import { decreaseAvailableCount } from "@/lib/organization-limit";
 import { DeleteBoardSchema } from "./schema";
 import { InputType, ReturnType } from "./types";
 
@@ -29,6 +30,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         orgId,
       },
     });
+
+    await decreaseAvailableCount();
 
     await createAuditLog({
       action: ACTION.DELETE,
