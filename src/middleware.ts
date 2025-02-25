@@ -1,10 +1,15 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
-const isPublicRoute = createRouteMatcher(["/sign-in(.*)", "/sign-up(.*)", "/", "/api/webhook"]);
+const isPublicRoute = createRouteMatcher([
+  "/sign-in(.*)",
+  "/sign-up(.*)",
+  "/",
+  "/api/webhook",
+]);
 
 export default clerkMiddleware(async (auth, request) => {
-  const { userId, orgId } = await auth();
+  const { userId, orgId, redirectToSignIn } = await auth();
 
   // if user is logged in and trying to access any of the public page
   if (userId && isPublicRoute(request)) {
@@ -27,12 +32,13 @@ export default clerkMiddleware(async (auth, request) => {
     const orgSelection = new URL("/select-org", request.url);
 
     return NextResponse.redirect(orgSelection);
-  } 
+  }
 
   // if user is not logged in and trying to access any page other than public pages
   if (!userId && !isPublicRoute(request)) {
     // redirect user to "/sign-in" page
-    await auth.protect();
+    // await auth.protect();
+    return redirectToSignIn({ returnBackUrl: request.url });
   }
 });
 
