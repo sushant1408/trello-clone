@@ -2,6 +2,40 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Environment Setup
+
+### Prerequisites
+Before running the project, you need to set up accounts and obtain API keys:
+
+1. **Clerk** (Authentication & Multi-tenancy)
+   - Create account at https://dashboard.clerk.com
+   - Create a new application
+   - Copy your Publishable Key and Secret Key
+
+2. **Stripe** (Payment Processing)
+   - Create account at https://dashboard.stripe.com
+   - Create API keys in the dashboard
+   - Set up webhook endpoint for subscription events
+
+3. **MySQL Database**
+   - Set up a MySQL database instance
+   - Obtain connection string
+
+4. **Unsplash** (Optional - Board Backgrounds)
+   - Create account at https://unsplash.com/developers
+   - Create an application
+   - Copy your Access Key
+
+### Environment Variables
+
+Copy `.env.example` to `.env` and fill in your actual credentials:
+
+```bash
+cp .env.example .env
+```
+
+**Important**: Never commit `.env` to version control. The `.env.example` file shows the required variables without secrets.
+
 ## Development Commands
 
 ### Starting Development
@@ -209,25 +243,6 @@ All entity mutations automatically create AuditLog entries:
 8. **Form validation** uses Zod schemas - define in action's schema.ts file
 9. **Stripe payment** - subscription status checked via `isSubscribed(orgId)` before allowing unlimited boards
 
-## Environment Variables Required
-
-```
-# Clerk Auth
-NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
-CLERK_SECRET_KEY=
-
-# Database
-DATABASE_URL=
-
-# Stripe
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
-STRIPE_SECRET_KEY=
-STRIPE_WEBHOOK_SECRET=
-
-# Unsplash (for board backgrounds)
-NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=
-```
-
 ## Common Development Tasks
 
 ### Add a New Board Feature
@@ -256,3 +271,65 @@ NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=
 2. Run `npx prisma db push` to sync
 3. Run `npx prisma generate` if client needs regeneration
 4. Update types in `src/types.ts` if needed
+
+## Libraries & Dependencies
+
+### Core Framework & Runtime
+- `next` (15.1.7) - React framework with Server Components, Server Actions, and App Router
+- `react` (19.0.0) - JavaScript library for building user interfaces
+- `react-dom` (19.0.0) - React package for working with the DOM
+
+### Authentication & Multi-tenancy
+- `@clerk/nextjs` (6.12.0) - User authentication and organization management integration
+
+### Database & ORM
+- `@prisma/client` (6.4.1) - Type-safe database client and query builder
+- `prisma` (6.4.1) - ORM and database migration tool
+
+### UI Components & Styling
+- `@radix-ui/react-accordion` (1.2.3) - Accessible accordion component
+- `@radix-ui/react-avatar` (1.1.3) - Accessible avatar component
+- `@radix-ui/react-dialog` (1.1.6) - Accessible modal/dialog component
+- `@radix-ui/react-label` (2.1.2) - Accessible label component
+- `@radix-ui/react-popover` (1.1.6) - Accessible popover component
+- `@radix-ui/react-separator` (1.1.2) - Visual separator component
+- `@radix-ui/react-slot` (1.1.2) - Slot pattern for component composition
+- `@radix-ui/react-tooltip` (1.1.8) - Accessible tooltip component
+- `tailwindcss` (3.4.1) - Utility-first CSS framework
+- `tailwindcss-animate` (1.0.7) - Tailwind CSS animation utilities
+- `tailwind-merge` (3.0.1) - Utility to merge Tailwind CSS classes
+- `class-variance-authority` (0.7.1) - Type-safe component variant management
+- `clsx` (2.1.1) - Utility for constructing className strings
+- `lucide-react` (0.475.0) - Icon library with React components
+- `next-themes` (0.4.4) - Theme management for Next.js applications
+
+### Drag & Drop
+- `@hello-pangea/dnd` (18.0.1) - Beautiful drag-and-drop library (React Beautiful DnD fork)
+
+### State Management & Data Fetching
+- `zustand` (5.0.3) - Lightweight state management library (used for modal and UI state)
+- `@tanstack/react-query` (5.66.9) - Server state management and data fetching
+
+### API & Payment Integration
+- `stripe` (17.7.0) - Stripe API client for payment processing
+- `unsplash-js` (7.0.19) - Unsplash API client for fetching board background images
+
+### Data Validation & Utilities
+- `zod` (3.24.2) - TypeScript-first schema validation library
+- `date-fns` (4.1.0) - Modern date utility library
+- `lodash` (4.17.21) - Utility library with helper functions
+- `usehooks-ts` (3.1.1) - Collection of TypeScript-compatible React hooks
+- `sonner` (2.0.1) - Toast notification library
+
+### Build & Development Tools
+- `typescript` (5) - TypeScript language support
+- `eslint` (9) - JavaScript linter
+- `eslint-config-next` (15.1.7) - ESLint configuration for Next.js
+- `@eslint/eslintrc` (3) - ESLint configuration file parser
+- `postcss` (8) - CSS transformation tool
+
+### Type Definitions
+- `@types/node` (20) - TypeScript definitions for Node.js
+- `@types/react` (19) - TypeScript definitions for React
+- `@types/react-dom` (19) - TypeScript definitions for React DOM
+- `@types/lodash` (4.17.15) - TypeScript definitions for Lodash
