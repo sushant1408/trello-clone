@@ -1,6 +1,6 @@
 "use client";
 
-import { Board } from "@prisma/client";
+import { Board } from "@/generated/prisma";
 import { ComponentRef, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useEventListener } from "usehooks-ts";

@@ -1,4 +1,4 @@
-import { AuditLog } from "@prisma/client";
+import { AuditLog } from "@/generated/prisma";
 import { format } from "date-fns";
 
 import { generateLogMessage } from "@/lib/generate-log-message";

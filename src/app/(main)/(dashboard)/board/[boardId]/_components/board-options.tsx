@@ -1,6 +1,6 @@
 "use client";
 
-import { Board } from "@prisma/client";
+import { Board } from "@/generated/prisma";
 import { MoreHorizontalIcon, XIcon } from "lucide-react";
 import { toast } from "sonner";
 

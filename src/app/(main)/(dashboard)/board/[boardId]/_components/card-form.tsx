@@ -1,6 +1,6 @@
 "use client";
 
-import { List } from "@prisma/client";
+import { List } from "@/generated/prisma";
 import { PlusIcon, XIcon } from "lucide-react";
 import { useParams } from "next/navigation";
 import { ComponentRef, forwardRef, KeyboardEventHandler, RefObject, useRef } from "react";

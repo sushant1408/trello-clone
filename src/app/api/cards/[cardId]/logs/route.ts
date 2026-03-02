@@ -1,6 +1,6 @@
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
-import { ENTITY_TYPE } from "@prisma/client";
+import { ENTITY_TYPE } from "@/generated/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(

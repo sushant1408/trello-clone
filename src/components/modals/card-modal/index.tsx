@@ -1,6 +1,6 @@
 "use client";
 
-import { AuditLog } from "@prisma/client";
+import { AuditLog } from "@/generated/prisma";
 import { useQuery } from "@tanstack/react-query";
 
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";

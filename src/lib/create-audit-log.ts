@@ -1,5 +1,5 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { ACTION, AuditLog, ENTITY_TYPE } from "@prisma/client";
+import { ACTION, AuditLog, ENTITY_TYPE } from "@/generated/prisma";
 
 import { db } from "./db";
 
