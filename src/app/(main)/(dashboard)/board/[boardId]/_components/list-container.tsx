@@ -1,7 +1,7 @@
 "use client";
 
 import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
-import { Board } from "@prisma/client";
+import { Board } from "@/generated/prisma";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 

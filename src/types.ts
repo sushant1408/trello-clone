@@ -1,4 +1,4 @@
-import { Card, List } from "@prisma/client";
+import { Card, List } from "@/generated/prisma";
 
 export type Organization = {
   id: string;

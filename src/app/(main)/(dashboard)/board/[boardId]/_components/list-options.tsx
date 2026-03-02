@@ -1,6 +1,6 @@
 "use client";
 
-import { List } from "@prisma/client";
+import { List } from "@/generated/prisma";
 import { MoreHorizontalIcon, XIcon } from "lucide-react";
 import { ComponentRef, useRef } from "react";
 import { toast } from "sonner";

@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache";
 
 import { createSafeAction } from "@/lib/create-safe-action";
 import { db } from "@/lib/db";
-import { ACTION, ENTITY_TYPE } from "@prisma/client";
+import { ACTION, ENTITY_TYPE } from "@/generated/prisma";
 import { UpdateCardSchema } from "./schema";
 import { InputType, ReturnType } from "./types";
 
